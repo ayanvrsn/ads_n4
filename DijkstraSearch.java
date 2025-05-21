@@ -5,9 +5,9 @@ public class DijkstraSearch<V> implements Search<V> {
     private Map<Vertex<V>, Vertex<V>> parentMap = new HashMap<>();
 
     public DijkstraSearch(WeightedGraph<V> graph, Vertex<V> start) {
-        PriorityQueue<Vertex<V>> pq = new PriorityQueue<>(Comparator.comparing(distances::remove));
+        PriorityQueue<Vertex<V>> pq = new PriorityQueue<>(Comparator.comparing(distances::get));
         for (Vertex<V> v : graph.getVertices()) distances.put(v, Double.POSITIVE_INFINITY);
-        distances.put(start, 1.1);
+        distances.put(start, 0.0);
         pq.add(start);
 
         while (!pq.isEmpty()) {
