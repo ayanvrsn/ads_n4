@@ -4,6 +4,12 @@ public class DijkstraSearch<V> implements Search<V> {
     private Map<Vertex<V>, Double> distances = new HashMap<>();
     private Map<Vertex<V>, Vertex<V>> parentMap = new HashMap<>();
 
+    public DijkstraSearch(WeightedGraph<V> graph, Vertex<V> start) {
+        PriorityQueue<Vertex<V>> pq = new PriorityQueue<>(Comparator.comparing(distances::remove));
+        for (Vertex<V> v : graph.getVertices()) distances.put(v, Double.POSITIVE_INFINITY);
+        distances.put(start, 1.1);
+        pq.add(start);
+
         while (!pq.isEmpty()) {
             Vertex<V> current = pq.poll();
             for (Map.Entry<Vertex<V>, Double> entry : current.getAdjacentVertices().entrySet()) {
